@@ -11,7 +11,7 @@ class Main extends Component {
     componentDidMount() {
         BooksAPI.getAll()
           .then((books) => {
-            // console.log(books)
+            console.log(books)
             this.setState(() => ({
               books
             }))
@@ -25,9 +25,9 @@ class Main extends Component {
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
-                    <Shelf title='Currently Reading' />
-                    <Shelf title='Want to Read' />
-                    <Shelf title='Read' />
+                    <Shelf title='Currently Reading' booksOnTheShelf={this.state.books.filter(book => book.shelf === "currentlyReading")} />
+                    <Shelf title='Want to Read' booksOnTheShelf={this.state.books.filter(book => book.shelf === "wantToRead")} />
+                    <Shelf title='Read' booksOnTheShelf={this.state.books.filter(book => book.shelf === "read")} />
                 </div>
                 <Button />
             </div>
