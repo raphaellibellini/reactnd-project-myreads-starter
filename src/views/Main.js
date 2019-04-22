@@ -18,6 +18,17 @@ class Main extends Component {
           })
     }
 
+    changeShelf = (updatedBook, shelf) => {
+        BooksAPI.update(updatedBook, shelf)
+            .then(resp => {
+                console.log(resp)
+                updatedBook.shelf = shelf;
+                this.setState(prevState => ({
+                    books: prevState.books.filter(book => updatedBook.id !== book.id).concat([updatedBook])
+                }))
+            })
+    }
+
     render(){
         return(
             <div className="list-books">
@@ -25,9 +36,9 @@ class Main extends Component {
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
-                    <Shelf title='Currently Reading' booksOnTheShelf={this.state.books.filter(book => book.shelf === "currentlyReading")} />
-                    <Shelf title='Want to Read' booksOnTheShelf={this.state.books.filter(book => book.shelf === "wantToRead")} />
-                    <Shelf title='Read' booksOnTheShelf={this.state.books.filter(book => book.shelf === "read")} />
+                    <Shelf title='Currently Reading' booksOnTheShelf={this.state.books.filter(book => book.shelf === "currentlyReading")} changeShelf={this.changeShelf} />
+                    <Shelf title='Want to Read' booksOnTheShelf={this.state.books.filter(book => book.shelf === "wantToRead")} changeShelf={this.changeShelf} />
+                    <Shelf title='Read' booksOnTheShelf={this.state.books.filter(book => book.shelf === "read")} changeShelf={this.changeShelf} />
                 </div>
                 <Button />
             </div>
