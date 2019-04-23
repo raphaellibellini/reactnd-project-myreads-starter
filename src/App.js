@@ -52,6 +52,18 @@ class BooksApp extends React.Component {
           if(resp.error) {
             this.setState({foundBooks: []})
           } else {
+            // Vai verificar se um livro da resposta esta em alguma prateleira,
+            // se sim vai 'setar' o valor da prateleira no livro da resposta.
+            // Isso se repete até verificar todos os livros da resposta.
+            resp.forEach(respBook => {
+              // console.log('Livro')
+              // console.log(respBook)
+              let bookOnTheShelf = this.state.books.filter(book => book.id === respBook.id);
+              // console.log(bookOnTheShelf)
+              if(bookOnTheShelf[0]) {
+                respBook.shelf = bookOnTheShelf[0].shelf;
+              }
+            })
             this.setState({foundBooks: resp})
           }
         })
