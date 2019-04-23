@@ -7,7 +7,9 @@ import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends React.Component {
   state = {
-    books: []
+    books: [],
+    foundBooks: [],
+    query: ''
   }
 
   componentDidMount() {
@@ -31,13 +33,31 @@ class BooksApp extends React.Component {
         })
   }
 
+  updateQuery = (query) => {
+		this.setState ({query: query})
+    this.searchBooks(query)
+  }
+  
+  searchBooks = (query) => {
+    if(query) {
+      BooksAPI.search(query)
+        .then(resp => {
+          this.setState({foundBooks: resp})
+        })
+    } else {
+      this.setState({foundBooks: []})
+    }
+  }
+
   render() {
     return (
       <div className="app">
         <Route exact path='/' render={() => (
           <Main books={this.state.books} changeShelf={this.changeShelf} />
         )} />
-        <Route exact path='/search' component={Search} />
+        <Route exact path='/search' render={() => (
+          <Search foundBooks={this.state.foundBooks} query={this.state.query} updateQuery={this.updateQuery} />
+        )} />
       </div>
     )
   }
