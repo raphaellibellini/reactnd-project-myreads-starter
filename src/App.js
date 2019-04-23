@@ -14,18 +14,22 @@ class BooksApp extends React.Component {
 
   componentDidMount() {
     BooksAPI.getAll()
-      .then((books) => {
-        console.log(books)
-        this.setState(() => ({
-          books
-        }))
+      .then((resp) => {
+        // console.log(resp)
+        this.setState({
+          books: resp
+        })
       })
   }
 
+  /* The selected book will receive the selected status.
+   * If it is not already on a shelf,
+   * it is added to the shelf of its attribute 
+   */
   changeShelf = (updatedBook, shelf) => {
     BooksAPI.update(updatedBook, shelf)
         .then(resp => {
-            console.log(resp)
+            // console.log(resp)
             updatedBook.shelf = shelf;
             this.setState(prevState => ({
                 books: prevState.books.filter(book => updatedBook.id !== book.id).concat([updatedBook])
@@ -33,11 +37,15 @@ class BooksApp extends React.Component {
         })
   }
 
+  /* The 'input' receives the characters that the user entered
+   * and invokes the 'search' method passing the searched term 
+   */
   updateQuery = (query) => {
 		this.setState ({query: query}, )
     this.searchBooks(query)
   }
 
+  // Clears the 'input' and the books found.
   clearQuery = () => {
     this.setState({
       query: '',
@@ -45,6 +53,10 @@ class BooksApp extends React.Component {
     })
   }
   
+  
+  /* Search the books according to the 'input'.
+   * If there is an error in the response, no book will be shown 
+   */
   searchBooks = (query) => {
     if(query) {
       BooksAPI.search(query)
@@ -52,9 +64,10 @@ class BooksApp extends React.Component {
           if(resp.error) {
             this.setState({foundBooks: []})
           } else {
-            // Vai verificar se um livro da resposta esta em alguma prateleira,
-            // se sim vai 'setar' o valor da prateleira no livro da resposta.
-            // Isso se repete até verificar todos os livros da resposta.
+            /* It will check if a response book is on some shelf,
+             * if yes it will set the shelf value in the answer book.
+             * This is repeated until you check all the books in the answer 
+             */
             resp.forEach(respBook => {
               // console.log('Livro')
               // console.log(respBook)

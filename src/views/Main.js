@@ -11,6 +11,7 @@ class Main extends Component {
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
+                {/* Shows the books according to the shelves to which they belong */}
                 <div className="list-books-content">
                     <Shelf title='Currently Reading' booksOnTheShelf={books.filter(book => book.shelf === "currentlyReading")} changeShelf={changeShelf} />
                     <Shelf title='Want to Read' booksOnTheShelf={books.filter(book => book.shelf === "wantToRead")} changeShelf={changeShelf} />

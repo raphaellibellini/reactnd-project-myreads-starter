@@ -9,6 +9,7 @@ class Search extends Component {
         return (
             <div className="search-books">
                 <div className="search-books-bar">
+                    {/* Go back to the main page and clear the search bar and results */}
                     <Link to='/' className="close-search" onClick={clearQuery}>Close</Link>
                     <div className="search-books-input-wrapper">
                         {/*
