@@ -34,8 +34,15 @@ class BooksApp extends React.Component {
   }
 
   updateQuery = (query) => {
-		this.setState ({query: query})
+		this.setState ({query: query}, )
     this.searchBooks(query)
+  }
+
+  clearQuery = () => {
+    this.setState({
+      query: '',
+      foundBooks: []
+    })
   }
   
   searchBooks = (query) => {
@@ -60,7 +67,8 @@ class BooksApp extends React.Component {
           <Main books={this.state.books} changeShelf={this.changeShelf} />
         )} />
         <Route exact path='/search' render={() => (
-          <Search foundBooks={this.state.foundBooks} query={this.state.query} updateQuery={this.updateQuery} />
+          <Search foundBooks={this.state.foundBooks} query={this.state.query} 
+            updateQuery={this.updateQuery} clearQuery={this.clearQuery} changeShelf={this.changeShelf} />
         )} />
       </div>
     )

@@ -4,12 +4,12 @@ import Book from '../components/Book'
 
 class Search extends Component {
     render() {
-        const {foundBooks, query, updateQuery} = this.props
+        const {foundBooks, query, updateQuery, clearQuery, changeShelf} = this.props
 
         return (
             <div className="search-books">
                 <div className="search-books-bar">
-                    <Link to='/' className="close-search">Close</Link>
+                    <Link to='/' className="close-search" onClick={clearQuery}>Close</Link>
                     <div className="search-books-input-wrapper">
                         {/*
                         NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -27,7 +27,7 @@ class Search extends Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {foundBooks.map(book => (
-                            <Book key={book.id} book={book} />
+                            <Book key={book.id} book={book} changeShelf={changeShelf} />
                         ))}
                     </ol>
                 </div>
