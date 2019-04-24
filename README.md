@@ -3,6 +3,10 @@
 A bookcase application that allows you to select and sort the books you have read, are reading or want to read.
 The project emphasizes using React to create the application, as well as an API server and client library, which will be used to store information as the user interacts with the application.
 
+![screenshot of the main page](img/screen1.png)
+
+![screenshot of the search page](img/screen2.png)
+
 ## How to start the app
 
 1. Install [Node.js](https://nodejs.org/en/).
