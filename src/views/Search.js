@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Book from '../components/Book'
+import {DebounceInput} from 'react-debounce-input'
 
 class Search extends Component {
     render() {
@@ -16,10 +17,15 @@ class Search extends Component {
                         NOTES: The search from BooksAPI is limited to a particular set of search terms.
                         You can find these search terms here:
                         https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+
+                        * 'DebounceInput' was used to prevent the application from making requests via API multiple times
+                        * even before the user entered the desired search term (improves performance)
+                        * and fix the bug where the user erased the searched term quickly the results remained
                         */}
-                        <input
+                        <DebounceInput
                             type='text'
                             placeholder='Search by title or author'
+                            debounceTimeout={200}
                             value={query}
                             onChange={(evt) => updateQuery(evt.target.value)}
                         />
