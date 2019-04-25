@@ -41,7 +41,7 @@ class BooksApp extends React.Component {
    * and invokes the 'search' method passing the searched term 
    */
   updateQuery = (query) => {
-		this.setState ({query: query}, )
+		this.setState ({query})
     this.searchBooks(query)
   }
 
