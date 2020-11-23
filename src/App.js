@@ -5,7 +5,7 @@ import Main from './views/Main'
 import {Route} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
-class Books extends React.Component {
+class App extends React.Component {
   state = {
     books: [],
     foundBooks: [],
@@ -100,4 +100,4 @@ class Books extends React.Component {
   }
 }
 
-export default Books
+export default App;
